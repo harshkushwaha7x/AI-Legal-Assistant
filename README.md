@@ -86,7 +86,3 @@ prisma/
 - **Phase 3** — Advanced (Risk Scoring, Vector Search, Knowledge Base)
 - **Phase 4** — SaaS (Dashboard, Billing, Roles)
 - **Phase 5** — Production (Deploy, Optimize, Secure)
-
-## License
-
-MIT
