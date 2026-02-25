@@ -104,5 +104,5 @@ This project is licensed under the **MIT License** — see [LICENSE](LICENSE).
 ---
 
 <div align="center">
-Made by **Harsh Kushwaha**
+Made by Harsh Kushwaha
 </div>
