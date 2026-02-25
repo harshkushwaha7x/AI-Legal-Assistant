@@ -70,7 +70,6 @@ export default function SignupPage() {
             });
 
             if (signInResult?.error) {
-                // Registration succeeded but auto-signin failed, redirect to login
                 router.push('/login?registered=true');
                 return;
             }

@@ -1,7 +1,17 @@
 'use client';
 
-import { useSession, signOut } from 'next-auth/react';
-import { Scale, LogOut, Loader2, FileText, ShieldCheck, MessageSquare, Search } from 'lucide-react';
+import { useSession } from 'next-auth/react';
+import {
+    Scale,
+    Loader2,
+    FileText,
+    ShieldCheck,
+    MessageSquare,
+    Search,
+    TrendingUp,
+    Clock,
+    ArrowUpRight,
+} from 'lucide-react';
 import Link from 'next/link';
 
 export default function DashboardPage() {
@@ -9,89 +19,130 @@ export default function DashboardPage() {
 
     if (status === 'loading') {
         return (
-            <div className="flex min-h-screen items-center justify-center pt-16">
+            <div className="flex min-h-[60vh] items-center justify-center">
                 <Loader2 className="h-8 w-8 animate-spin text-primary-500" />
             </div>
         );
     }
 
+    const stats = [
+        { label: 'Documents', value: '0', change: '+0%', icon: FileText, color: 'text-primary-400', bg: 'bg-primary-500/10' },
+        { label: 'Reviews', value: '0', change: '+0%', icon: ShieldCheck, color: 'text-emerald-400', bg: 'bg-emerald-500/10' },
+        { label: 'Chat Sessions', value: '0', change: '+0%', icon: MessageSquare, color: 'text-violet-400', bg: 'bg-violet-500/10' },
+        { label: 'Research Queries', value: '0', change: '+0%', icon: Search, color: 'text-amber-400', bg: 'bg-amber-500/10' },
+    ];
+
     const quickActions = [
-        { icon: FileText, title: 'Generate Document', description: 'Create NDAs, contracts, leases', href: '/dashboard/documents', color: 'from-primary-600 to-primary-700' },
-        { icon: ShieldCheck, title: 'Review Contract', description: 'AI-powered risk analysis', href: '/dashboard/reviews', color: 'from-emerald-600 to-emerald-700' },
-        { icon: MessageSquare, title: 'Legal AI Chat', description: 'Ask legal questions', href: '/dashboard/chat', color: 'from-violet-600 to-violet-700' },
-        { icon: Search, title: 'Legal Research', description: 'Search legal knowledge', href: '/dashboard/research', color: 'from-amber-600 to-amber-700' },
+        {
+            icon: FileText,
+            title: 'Generate Document',
+            description: 'Create NDAs, contracts, leases, and employment agreements with AI.',
+            href: '/dashboard/documents',
+            gradient: 'from-primary-600 to-indigo-700',
+        },
+        {
+            icon: ShieldCheck,
+            title: 'Review Contract',
+            description: 'Upload a contract for AI-powered risk analysis and clause breakdown.',
+            href: '/dashboard/reviews',
+            gradient: 'from-emerald-600 to-teal-700',
+        },
+        {
+            icon: MessageSquare,
+            title: 'AI Legal Chat',
+            description: 'Ask legal questions in plain English and get instant answers.',
+            href: '/dashboard/chat',
+            gradient: 'from-violet-600 to-purple-700',
+        },
+        {
+            icon: Search,
+            title: 'Legal Research',
+            description: 'Search case law, statutes, and regulations with AI-powered vector search.',
+            href: '/dashboard/research',
+            gradient: 'from-amber-600 to-orange-700',
+        },
     ];
 
     return (
-        <div className="relative min-h-screen px-4 pb-20 pt-24 sm:px-6 lg:px-8">
-            {/* Background */}
-            <div className="pointer-events-none absolute inset-0">
-                <div className="absolute -left-40 top-0 h-[500px] w-[500px] rounded-full bg-primary-600/6 blur-[128px]" />
+        <div className="space-y-8">
+            {/* Welcome section */}
+            <div>
+                <h1 className="text-2xl font-bold text-white sm:text-3xl">
+                    Welcome back, {session?.user?.name?.split(' ')[0] || 'there'} 👋
+                </h1>
+                <p className="mt-1 text-surface-400">
+                    Here&apos;s an overview of your legal workspace.
+                </p>
             </div>
 
-            <div className="relative mx-auto max-w-6xl">
-                {/* Welcome header */}
-                <div className="mb-10 flex items-center justify-between">
-                    <div>
-                        <h1 className="text-3xl font-bold text-white">
-                            Welcome back, {session?.user?.name?.split(' ')[0] || 'there'}
-                        </h1>
-                        <p className="mt-1 text-surface-400">
-                            {session?.user?.email} • {session?.user?.subscription || 'Free'} Plan
-                        </p>
-                    </div>
-                    <button
-                        onClick={() => signOut({ callbackUrl: '/' })}
-                        className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-medium text-surface-300 transition-all hover:bg-white/10 hover:text-white"
-                    >
-                        <LogOut className="h-4 w-4" />
-                        Sign Out
-                    </button>
-                </div>
-
-                {/* Stats cards */}
-                <div className="mb-10 grid grid-cols-2 gap-4 md:grid-cols-4">
-                    {[
-                        { label: 'Documents', value: '0' },
-                        { label: 'Reviews', value: '0' },
-                        { label: 'Chat Sessions', value: '0' },
-                        { label: 'Escalations', value: '0' },
-                    ].map((stat) => (
-                        <div key={stat.label} className="glass-card rounded-xl p-5">
-                            <p className="text-sm text-surface-400">{stat.label}</p>
-                            <p className="mt-1 text-2xl font-bold text-white">{stat.value}</p>
+            {/* Stats grid */}
+            <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+                {stats.map((stat) => (
+                    <div key={stat.label} className="glass-card rounded-xl p-5">
+                        <div className="flex items-center justify-between">
+                            <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${stat.bg}`}>
+                                <stat.icon className={`h-5 w-5 ${stat.color}`} />
+                            </div>
+                            <span className="flex items-center gap-1 text-xs text-emerald-400">
+                                <TrendingUp className="h-3 w-3" />
+                                {stat.change}
+                            </span>
                         </div>
-                    ))}
-                </div>
+                        <p className="mt-3 text-2xl font-bold text-white">{stat.value}</p>
+                        <p className="text-sm text-surface-400">{stat.label}</p>
+                    </div>
+                ))}
+            </div>
 
-                {/* Quick actions */}
-                <h2 className="mb-4 text-lg font-semibold text-white">Quick Actions</h2>
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {/* Quick actions */}
+            <div>
+                <div className="mb-4 flex items-center justify-between">
+                    <h2 className="text-lg font-semibold text-white">Quick Actions</h2>
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2">
                     {quickActions.map((action) => (
                         <Link
                             key={action.title}
                             href={action.href}
-                            className="glass-card group rounded-xl p-6 transition-all hover:-translate-y-1"
+                            className="glass-card group flex items-start gap-4 rounded-xl p-5 transition-all hover:-translate-y-0.5"
                         >
-                            <div className={`mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${action.color}`}>
-                                <action.icon className="h-5 w-5 text-white" />
+                            <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${action.gradient}`}>
+                                <action.icon className="h-6 w-6 text-white" />
                             </div>
-                            <h3 className="font-semibold text-white">{action.title}</h3>
-                            <p className="mt-1 text-sm text-surface-400">{action.description}</p>
+                            <div className="flex-1">
+                                <div className="flex items-center gap-2">
+                                    <h3 className="font-semibold text-white">{action.title}</h3>
+                                    <ArrowUpRight className="h-4 w-4 text-surface-500 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary-400" />
+                                </div>
+                                <p className="mt-1 text-sm leading-relaxed text-surface-400">{action.description}</p>
+                            </div>
                         </Link>
                     ))}
                 </div>
+            </div>
 
-                {/* Recent activity placeholder */}
-                <div className="mt-10">
-                    <h2 className="mb-4 text-lg font-semibold text-white">Recent Activity</h2>
-                    <div className="glass-card flex flex-col items-center justify-center rounded-xl py-16 text-center">
-                        <Scale className="mb-4 h-12 w-12 text-surface-600" />
-                        <h3 className="text-lg font-medium text-surface-300">No activity yet</h3>
-                        <p className="mt-1 max-w-sm text-sm text-surface-500">
-                            Start by generating a document, reviewing a contract, or chatting with our legal AI.
-                        </p>
-                    </div>
+            {/* Recent activity */}
+            <div>
+                <div className="mb-4 flex items-center justify-between">
+                    <h2 className="text-lg font-semibold text-white">Recent Activity</h2>
+                    <button className="flex items-center gap-1.5 text-sm text-primary-400 transition-colors hover:text-primary-300">
+                        <Clock className="h-3.5 w-3.5" />
+                        View all
+                    </button>
+                </div>
+                <div className="glass-card flex flex-col items-center justify-center rounded-xl py-16 text-center">
+                    <Scale className="mb-4 h-12 w-12 text-surface-600" />
+                    <h3 className="text-lg font-medium text-surface-300">No activity yet</h3>
+                    <p className="mt-1 max-w-sm text-sm text-surface-500">
+                        Start by generating a document, reviewing a contract, or chatting with our legal AI assistant.
+                    </p>
+                    <Link
+                        href="/dashboard/documents"
+                        className="mt-6 inline-flex items-center gap-2 rounded-xl bg-primary-600 px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-primary-500"
+                    >
+                        <FileText className="h-4 w-4" />
+                        Create Your First Document
+                    </Link>
                 </div>
             </div>
         </div>

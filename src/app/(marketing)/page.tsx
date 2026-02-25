@@ -182,8 +182,8 @@ export default function HomePage() {
                         <div
                             key={plan.name}
                             className={`relative rounded-2xl p-8 animate-slide-up ${plan.popular
-                                    ? 'border-2 border-primary-500 bg-primary-950/40 shadow-xl shadow-primary-600/10'
-                                    : 'glass-card'
+                                ? 'border-2 border-primary-500 bg-primary-950/40 shadow-xl shadow-primary-600/10'
+                                : 'glass-card'
                                 }`}
                             style={{ animationDelay: `${i * 100}ms` }}
                         >
@@ -213,8 +213,8 @@ export default function HomePage() {
                             <Link
                                 href="/signup"
                                 className={`mt-8 block rounded-xl py-3 text-center text-sm font-semibold transition-all ${plan.popular
-                                        ? 'bg-primary-600 text-white hover:bg-primary-500 shadow-lg shadow-primary-600/25'
-                                        : 'border border-white/10 bg-white/5 text-white hover:bg-white/10'
+                                    ? 'bg-primary-600 text-white hover:bg-primary-500 shadow-lg shadow-primary-600/25'
+                                    : 'border border-white/10 bg-white/5 text-white hover:bg-white/10'
                                     }`}
                             >
                                 {plan.cta}
