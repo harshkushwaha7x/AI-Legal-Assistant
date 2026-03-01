@@ -13,6 +13,7 @@ import {
     Clock,
     ArrowUpRight,
     AlertTriangle,
+    UserCheck,
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -20,6 +21,7 @@ interface DashboardStats {
     documents: number;
     reviews: number;
     chatSessions: number;
+    escalations: number;
 }
 
 interface RecentDoc {
@@ -39,6 +41,14 @@ interface RecentReview {
     createdAt: string;
 }
 
+interface RecentEscalation {
+    id: string;
+    subject: string;
+    status: string;
+    priority: number;
+    createdAt: string;
+}
+
 const riskColors: Record<string, string> = {
     LOW: 'text-emerald-400',
     MEDIUM: 'text-amber-400',
@@ -51,6 +61,7 @@ export default function DashboardPage() {
     const [stats, setStats] = useState<DashboardStats | null>(null);
     const [recentDocs, setRecentDocs] = useState<RecentDoc[]>([]);
     const [recentReviews, setRecentReviews] = useState<RecentReview[]>([]);
+    const [recentEscalations, setRecentEscalations] = useState<RecentEscalation[]>([]);
     const [loadingStats, setLoadingStats] = useState(true);
 
     useEffect(() => {
@@ -64,6 +75,7 @@ export default function DashboardPage() {
             setStats(data.stats);
             setRecentDocs(data.recent?.documents || []);
             setRecentReviews(data.recent?.reviews || []);
+            setRecentEscalations(data.recent?.escalations || []);
         } catch (error) {
             console.error('Failed to fetch stats:', error);
         } finally {
@@ -83,7 +95,7 @@ export default function DashboardPage() {
         { label: 'Documents', value: stats?.documents ?? 0, icon: FileText, color: 'text-primary-400', bg: 'bg-primary-500/10', href: '/dashboard/documents' },
         { label: 'Reviews', value: stats?.reviews ?? 0, icon: ShieldCheck, color: 'text-emerald-400', bg: 'bg-emerald-500/10', href: '/dashboard/reviews' },
         { label: 'Chat Sessions', value: stats?.chatSessions ?? 0, icon: MessageSquare, color: 'text-violet-400', bg: 'bg-violet-500/10', href: '/dashboard/chat' },
-        { label: 'Research', value: 0, icon: Search, color: 'text-amber-400', bg: 'bg-amber-500/10', href: '/dashboard/research' },
+        { label: 'Escalations', value: stats?.escalations ?? 0, icon: UserCheck, color: 'text-amber-400', bg: 'bg-amber-500/10', href: '/dashboard/escalations' },
     ];
 
     const quickActions = [
@@ -142,6 +154,18 @@ export default function DashboardPage() {
             icon: ShieldCheck,
             iconColor: r.riskLevel ? riskColors[r.riskLevel] || 'text-emerald-400' : 'text-surface-400',
             iconBg: 'bg-emerald-500/10',
+        })),
+        ...recentEscalations.map((e) => ({
+            id: e.id,
+            type: 'escalation' as const,
+            title: e.subject,
+            subtitle: `Priority: ${['Low', 'Medium', 'High', 'Urgent'][e.priority] || 'Low'}`,
+            status: e.status,
+            createdAt: e.createdAt,
+            href: `/dashboard/escalations/${e.id}`,
+            icon: UserCheck,
+            iconColor: e.priority >= 2 ? 'text-orange-400' : 'text-amber-400',
+            iconBg: 'bg-amber-500/10',
         })),
     ]
         .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
@@ -248,8 +272,8 @@ export default function DashboardPage() {
                                 </div>
                                 <div className="text-right shrink-0">
                                     <span className={`rounded-lg px-2 py-0.5 text-[10px] font-medium ${item.status === 'COMPLETED' ? 'bg-emerald-500/15 text-emerald-400' :
-                                            item.status === 'FAILED' ? 'bg-red-500/15 text-red-400' :
-                                                'bg-surface-500/15 text-surface-400'
+                                        item.status === 'FAILED' ? 'bg-red-500/15 text-red-400' :
+                                            'bg-surface-500/15 text-surface-400'
                                         }`}>
                                         {item.status}
                                     </span>
