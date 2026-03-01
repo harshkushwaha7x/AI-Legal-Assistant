@@ -16,12 +16,15 @@ export async function GET() {
             documentCount,
             reviewCount,
             chatSessionCount,
+            escalationCount,
             recentDocuments,
             recentReviews,
+            recentEscalations,
         ] = await Promise.all([
             prisma.document.count({ where: { userId } }),
             prisma.contractReview.count({ where: { userId } }),
             prisma.chatSession.count({ where: { userId } }),
+            prisma.lawyerEscalation.count({ where: { userId } }),
             prisma.document.findMany({
                 where: { userId },
                 orderBy: { createdAt: 'desc' },
@@ -47,6 +50,18 @@ export async function GET() {
                     createdAt: true,
                 },
             }),
+            prisma.lawyerEscalation.findMany({
+                where: { userId },
+                orderBy: { createdAt: 'desc' },
+                take: 5,
+                select: {
+                    id: true,
+                    subject: true,
+                    status: true,
+                    priority: true,
+                    createdAt: true,
+                },
+            }),
         ]);
 
         return NextResponse.json({
@@ -54,10 +69,12 @@ export async function GET() {
                 documents: documentCount,
                 reviews: reviewCount,
                 chatSessions: chatSessionCount,
+                escalations: escalationCount,
             },
             recent: {
                 documents: recentDocuments,
                 reviews: recentReviews,
+                escalations: recentEscalations,
             },
         });
     } catch (error) {
