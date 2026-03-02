@@ -6,27 +6,28 @@ A production-ready AI Legal Assistant SaaS platform with B2C and B2B features, b
 
 ### B2C
 - **Document Generation** — Create NDAs, leases, contracts, and more with AI-powered templates
-- **Contract Review** — Upload contracts for AI analysis with risk scoring
-- **Legal AI Chat** — Ask legal questions in plain English
-- **Lawyer Escalation** — Seamlessly connect with human lawyers
+- **Contract Review** — Upload contracts for AI analysis with risk scoring and clause breakdown
+- **Legal AI Chat** — Ask legal questions in plain English with context-aware responses
+- **Legal Research** — AI-powered search across statutes, case law, and regulations
+- **Lawyer Escalation** — Submit complex cases with priority tracking and status workflow
+- **Document Templates** — 8 pre-built templates (NDAs, employment, leases, partnerships)
 
 ### B2B
 - **Document Automation** — Enterprise-grade templates for law firms
 - **Client Intake** — Automated intake workflows
 - **Contract Acceleration** — Bulk review and analysis
-- **Legal Research** — AI-powered vector search across legal knowledge
+- **Knowledge Base** — Built-in legal knowledge across 6 practice areas
 
 ## Tech Stack
 
 | Layer       | Technology                      |
 |-------------|--------------------------------|
 | Frontend    | Next.js 15, React 19, TailwindCSS v4 |
-| Backend     | Next.js API Routes + FastAPI (Python) |
+| Backend     | Next.js API Routes             |
 | Database    | PostgreSQL + Prisma ORM        |
-| AI          | OpenAI GPT-4                   |
-| Vector DB   | Pinecone                       |
-| Auth        | NextAuth.js                    |
-| Deployment  | Vercel + Docker                |
+| AI          | OpenAI GPT-4o-mini + Fallback engines |
+| Auth        | NextAuth.js (Google, GitHub)   |
+| Deployment  | Vercel                         |
 
 ## Getting Started
 
@@ -34,7 +35,7 @@ A production-ready AI Legal Assistant SaaS platform with B2C and B2B features, b
 
 - Node.js 18+
 - PostgreSQL 15+
-- OpenAI API key
+- OpenAI API key (optional — fallback engines work without it)
 
 ### Installation
 
@@ -47,7 +48,7 @@ cd AI-Legal-Assistant
 npm install
 
 # Set up environment variables
-cp .env.example .env.local
+copy .env.example .env.local
 # Edit .env.local with your credentials
 
 # Set up database
@@ -64,28 +65,46 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 
 ```
 src/
-├── app/                  # Next.js App Router pages
-│   ├── layout.tsx        # Root layout with Navbar/Footer
-│   ├── page.tsx          # Landing page
-│   └── globals.css       # Global styles & theme
+├── app/
+│   ├── page.tsx                    # Landing page
+│   ├── dashboard/
+│   │   ├── page.tsx                # Dashboard overview with live stats
+│   │   ├── documents/              # Document management (list, create, view)
+│   │   ├── reviews/                # Contract review (list, upload, detail)
+│   │   ├── chat/                   # AI legal chat with session management
+│   │   ├── research/               # AI-powered legal research
+│   │   ├── escalations/            # Lawyer escalation (list, create, detail)
+│   │   ├── templates/              # Document template gallery
+│   │   ├── settings/               # User settings (profile, notifications)
+│   │   └── support/                # Help center with FAQ
+│   └── api/
+│       ├── documents/              # Document CRUD endpoints
+│       ├── reviews/                # Contract review endpoints
+│       ├── chat/                   # Chat sessions & messages
+│       ├── research/               # Legal research search
+│       ├── escalations/            # Escalation CRUD endpoints
+│       └── dashboard/stats/        # Dashboard statistics
 ├── components/
-│   ├── layout/           # Navbar, Footer, Sidebar
-│   ├── ui/               # Reusable UI components
-│   └── features/         # Feature-specific components
-├── lib/                  # Utilities, API clients, constants
-├── types/                # TypeScript type definitions
-└── styles/               # Additional styles
-prisma/
-└── schema.prisma         # Database schema
+│   ├── layout/                     # Navbar, Footer, Sidebar
+│   ├── dashboard/                  # Dashboard UI components
+│   ├── chat/                       # Chat UI (bubbles, input, sidebar)
+│   ├── escalation/                 # Status tracker, priority badge
+│   └── research/                   # Search bar, result cards, filters
+├── lib/
+│   ├── ai/                         # AI engines (docs, contracts, chat, research)
+│   ├── validations/                # Zod schemas
+│   ├── auth.ts                     # NextAuth configuration
+│   └── prisma.ts                   # Database client
+└── types/                          # TypeScript definitions
 ```
 
 ## Development Roadmap
 
-- **Phase 1** — Foundation (Auth, DB, Landing Page)
-- **Phase 2** — Core Features (Doc Gen, AI Chat, Contract Review)
-- **Phase 3** — Advanced (Risk Scoring, Vector Search, Knowledge Base)
-- **Phase 4** — SaaS (Dashboard, Billing, Roles)
-- **Phase 5** — Production (Deploy, Optimize, Secure)
+- ✅ **Phase 1** — Foundation (Auth, DB, Landing Page)
+- ✅ **Phase 2** — Core Features (Doc Gen, AI Chat, Contract Review)
+- ✅ **Phase 3** — Advanced (Legal Research, Escalations, Templates)
+- 🔄 **Phase 4** — SaaS (Dashboard, Billing, Roles)
+- ⬜ **Phase 5** — Production (Deploy, Optimize, Secure)
 
 ## License
 
@@ -106,3 +125,4 @@ This project is licensed under the **MIT License** — see [LICENSE](LICENSE).
 <div align="center">
 Made by Harsh Kushwaha
 </div>
+
