@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Sidebar from '@/components/dashboard/Sidebar';
 import DashboardHeader from '@/components/dashboard/DashboardHeader';
+import CommandPalette from '@/components/ui/CommandPalette';
 
 export default function DashboardShell({ children }: { children: React.ReactNode }) {
     const [collapsed, setCollapsed] = useState(false);
@@ -43,6 +44,9 @@ export default function DashboardShell({ children }: { children: React.ReactNode
                 <DashboardHeader onMenuToggle={() => setMobileOpen(!mobileOpen)} />
                 <main className="flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
             </div>
+
+            {/* Command palette (Ctrl+K) */}
+            <CommandPalette />
         </div>
     );
 }
