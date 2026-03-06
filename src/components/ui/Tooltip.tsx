@@ -21,7 +21,7 @@ export default function Tooltip({
     position = 'top',
 }: TooltipProps) {
     const [visible, setVisible] = useState(false);
-    const timeoutRef = useRef<NodeJS.Timeout>();
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     const handleMouseEnter = () => {
         timeoutRef.current = setTimeout(() => setVisible(true), 400);
