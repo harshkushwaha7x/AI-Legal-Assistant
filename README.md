@@ -100,11 +100,11 @@ src/
 
 ## Development Roadmap
 
-- ✅ **Phase 1** — Foundation (Auth, DB, Landing Page)
-- ✅ **Phase 2** — Core Features (Doc Gen, AI Chat, Contract Review)
-- ✅ **Phase 3** — Advanced (Legal Research, Escalations, Templates)
-- 🔄 **Phase 4** — SaaS (Dashboard, Billing, Roles)
-- ⬜ **Phase 5** — Production (Deploy, Optimize, Secure)
+- [x] **Phase 1** -- Foundation (Auth, DB, Landing Page)
+- [x] **Phase 2** -- Core Features (Doc Gen, AI Chat, Contract Review)
+- [x] **Phase 3** -- Advanced (Legal Research, Escalations, Templates)
+- [ ] **Phase 4** -- SaaS (Dashboard, Billing, Roles)
+- [ ] **Phase 5** -- Production (Deploy, Optimize, Secure)
 
 ## License
 

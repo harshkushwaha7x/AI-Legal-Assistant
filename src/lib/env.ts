@@ -30,25 +30,25 @@ export function validateEnv(): { valid: boolean; errors: string[]; warnings: str
 
         if (!value) {
             if (envVar.required) {
-                errors.push(`❌ Missing required: ${envVar.key} — ${envVar.description}`);
+                errors.push(`[ERROR] Missing required: ${envVar.key} -- ${envVar.description}`);
             } else {
-                warnings.push(`⚠️  Missing optional: ${envVar.key} — ${envVar.description}`);
+                warnings.push(`[WARN] Missing optional: ${envVar.key} -- ${envVar.description}`);
             }
         }
     }
 
     if (errors.length > 0) {
-        console.error('\n🔴 Environment Validation Failed:');
+        console.error('\nEnvironment Validation Failed:');
         errors.forEach((e) => console.error(`  ${e}`));
     }
 
     if (warnings.length > 0) {
-        console.warn('\n🟡 Environment Warnings:');
+        console.warn('\nEnvironment Warnings:');
         warnings.forEach((w) => console.warn(`  ${w}`));
     }
 
     if (errors.length === 0 && warnings.length === 0) {
-        console.log('✅ All environment variables configured');
+        console.log('All environment variables configured.');
     }
 
     return { valid: errors.length === 0, errors, warnings };

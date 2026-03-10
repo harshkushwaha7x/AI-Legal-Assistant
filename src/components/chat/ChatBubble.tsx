@@ -16,8 +16,8 @@ export default function ChatBubble({ role, content, timestamp }: ChatBubbleProps
             {/* Avatar */}
             <div
                 className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${isUser
-                        ? 'bg-primary-600/20 text-primary-400'
-                        : 'bg-accent-500/20 text-accent-400'
+                    ? 'bg-primary-600/20 text-primary-400'
+                    : 'bg-accent-500/20 text-accent-400'
                     }`}
             >
                 {isUser ? <User className="h-4 w-4" /> : <Scale className="h-4 w-4" />}
@@ -27,8 +27,8 @@ export default function ChatBubble({ role, content, timestamp }: ChatBubbleProps
             <div className={`max-w-[80%] space-y-1 ${isUser ? 'items-end' : ''}`}>
                 <div
                     className={`rounded-2xl px-4 py-3 text-sm leading-relaxed ${isUser
-                            ? 'bg-primary-600 text-white rounded-tr-md'
-                            : 'glass-card text-surface-200 rounded-tl-md'
+                        ? 'bg-primary-600 text-white rounded-tr-md'
+                        : 'glass-card text-surface-200 rounded-tl-md'
                         }`}
                 >
                     {/* Render markdown-like formatting */}
@@ -47,7 +47,7 @@ export default function ChatBubble({ role, content, timestamp }: ChatBubbleProps
                                 </p>
                             );
                         }
-                        if (line.startsWith('⚠️') || line.startsWith('📋')) {
+                        if (line.startsWith('Important:') || line.startsWith('Next Steps:') || line.startsWith('Key Takeaway:')) {
                             return (
                                 <p key={i} className="mt-2 font-medium text-amber-300">
                                     {line}

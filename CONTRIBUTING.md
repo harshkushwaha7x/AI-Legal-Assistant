@@ -2,7 +2,7 @@
 
 Thank you for your interest in contributing to LegalAI! This guide will help you get started.
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -40,7 +40,7 @@ Thank you for your interest in contributing to LegalAI! This guide will help you
    npm run dev
    ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 src/
@@ -58,7 +58,7 @@ src/
 └── types/            # TypeScript type definitions
 ```
 
-## 🔧 Development Guidelines
+## Development Guidelines
 
 ### Code Style
 - Use TypeScript for all new files
@@ -89,7 +89,7 @@ Follow conventional commits:
 2. Export from `src/hooks/index.ts`
 3. Prefix with `use` (React convention)
 
-## 📋 Available Scripts
+## Available Scripts
 
 | Script | Description |
 |--------|-------------|
@@ -102,7 +102,7 @@ Follow conventional commits:
 | `npm run db:studio` | Open Prisma Studio |
 | `npm run db:seed` | Seed legal knowledge data |
 
-## 🐛 Reporting Issues
+## Reporting Issues
 
 Please include:
 - Steps to reproduce
@@ -110,6 +110,6 @@ Please include:
 - Browser/OS version
 - Screenshots if applicable
 
-## 📄 License
+## License
 
 By contributing, you agree that your contributions will be licensed under the MIT License.

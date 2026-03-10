@@ -27,8 +27,8 @@ EXPERTISE AREAS:
 RESPONSE FORMAT:
 - Use clear headings for different topics
 - Use bullet points for lists
-- Highlight important warnings with "⚠️ Important:"
-- End complex answers with "📋 Next Steps:" when applicable
+- Highlight important warnings with "Important:"
+- End complex answers with "Next Steps:" when applicable
 - Keep responses focused and actionable
 
 DISCLAIMER: Always include a brief note that this is AI-generated legal information, not legal advice, for complex or high-stakes queries.`;
@@ -104,9 +104,9 @@ An NDA is a legally binding contract that establishes a confidential relationshi
 - **Mutual NDA**: Both parties share and receive information
 - **Multilateral NDA**: Three or more parties involved
 
-⚠️ Important: NDAs must be reasonable in scope and duration to be enforceable.
+Important: NDAs must be reasonable in scope and duration to be enforceable.
 
-📋 Next Steps: Consider what information needs protection, the relationship between parties, and the appropriate duration.`,
+Next Steps: Consider what information needs protection, the relationship between parties, and the appropriate duration.`,
 
     contract: `**Contract Law Basics**
 
@@ -124,7 +124,7 @@ A valid contract requires these essential elements:
 - Impossibility of performance
 - Statute of limitations for claims
 
-⚠️ Important: Always read contracts carefully before signing. Verbal contracts can be enforceable but are harder to prove.`,
+Important: Always read contracts carefully before signing. Verbal contracts can be enforceable but are harder to prove.`,
 
     employment: `**Employment Law Overview**
 
@@ -142,7 +142,7 @@ A valid contract requires these essential elements:
 - Family and medical leave (FMLA for eligible employees)
 - Workers' compensation for on-the-job injuries
 
-⚠️ Important: Employment laws vary significantly by state. Always check your local regulations.`,
+Important: Employment laws vary significantly by state. Always check your local regulations.`,
 
     llc: `**LLC Formation Guide**
 
@@ -164,7 +164,7 @@ A Limited Liability Company (LLC) provides personal liability protection with ta
 
 **Costs:** Filing fees range from $50-$500 depending on state.
 
-📋 Next Steps: Research your state's specific requirements and consider consulting with a business attorney.`,
+Next Steps: Research your state's specific requirements and consider consulting with a business attorney.`,
 
     lease: `**Lease Agreement Essentials**
 
@@ -188,7 +188,7 @@ A Limited Liability Company (LLC) provides personal liability protection with ta
 - Subletting restrictions
 - Lease renewal terms
 
-⚠️ Important: Landlord-tenant laws are very state-specific. Know your local regulations.`,
+Important: Landlord-tenant laws are very state-specific. Know your local regulations.`,
 
     ip: `**Intellectual Property Overview**
 
@@ -214,7 +214,7 @@ A Limited Liability Company (LLC) provides personal liability protection with ta
    - Must take reasonable steps to maintain secrecy
    - Protected indefinitely if kept secret
 
-📋 Next Steps: Identify which type of IP protection you need and consider filing appropriate applications.`,
+Next Steps: Identify which type of IP protection you need and consider filing appropriate applications.`,
 };
 
 export function generateFallbackResponse(userMessage: string): string {
@@ -243,7 +243,7 @@ Family law matters are highly personal and jurisdiction-specific. Here are some 
 - Types: sole custody, joint custody, physical vs. legal custody
 - Custody can be modified if circumstances change significantly
 
-⚠️ Important: Family law matters almost always benefit from professional legal representation.
+Important: Family law matters almost always benefit from professional legal representation.
 
 ---
 *This is AI-generated legal information, not legal advice. Please consult a family law attorney for your specific situation.*`;
@@ -263,7 +263,7 @@ Before filing a lawsuit, consider these steps:
 **General Timeline:**
 - File complaint → Defendant responds → Discovery → Potential settlement → Trial
 
-⚠️ Important: Statutes of limitations vary by claim type and state. Don't delay seeking legal help.
+Important: Statutes of limitations vary by claim type and state. Don't delay seeking legal help.
 
 ---
 *This is AI-generated legal information, not legal advice. Please consult an attorney for your specific situation.*`;
@@ -282,7 +282,7 @@ Before filing a lawsuit, consider these steps:
 
 Could you provide more details about your specific legal question? The more context you give me, the more helpful I can be.
 
-📋 **Tips for getting the best answers:**
+**Tips for getting the best answers:**
 - Describe your specific situation
 - Mention your state/jurisdiction if relevant
 - Let me know if you're asking about business or personal matters

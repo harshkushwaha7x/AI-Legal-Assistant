@@ -3,12 +3,12 @@
 import { Scale, Sparkles, MessageSquare, ArrowRight } from 'lucide-react';
 
 const SUGGESTIONS = [
-    { text: 'What are the key clauses I should include in an NDA?', icon: '📝' },
-    { text: 'Explain the difference between an LLC and a Corporation', icon: '🏢' },
-    { text: 'What are my rights as a tenant if my landlord is not making repairs?', icon: '🏠' },
-    { text: 'How do I protect my intellectual property as a startup founder?', icon: '💡' },
-    { text: 'What should I know before signing an employment contract?', icon: '👔' },
-    { text: 'Can I break a lease early without penalty?', icon: '📋' },
+    { text: 'What are the key clauses I should include in an NDA?', icon: '>' },
+    { text: 'Explain the difference between an LLC and a Corporation', icon: '>' },
+    { text: 'What are my rights as a tenant if my landlord is not making repairs?', icon: '>' },
+    { text: 'How do I protect my intellectual property as a startup founder?', icon: '>' },
+    { text: 'What should I know before signing an employment contract?', icon: '>' },
+    { text: 'Can I break a lease early without penalty?', icon: '>' },
 ];
 
 interface ChatEmptyStateProps {

@@ -76,19 +76,19 @@ const KNOWLEDGE_DATA = [
 ];
 
 async function main() {
-    console.log('🌱 Seeding legal knowledge base...');
+    console.log('Seeding legal knowledge base...');
 
     for (const item of KNOWLEDGE_DATA) {
         await prisma.legalKnowledge.create({ data: item });
-        console.log(`  ✅ ${item.title}`);
+        console.log(`  [OK] ${item.title}`);
     }
 
-    console.log(`\n🎉 Seeded ${KNOWLEDGE_DATA.length} knowledge entries!`);
+    console.log(`\nSeeded ${KNOWLEDGE_DATA.length} knowledge entries successfully!`);
 }
 
 main()
     .catch((e) => {
-        console.error('❌ Seed failed:', e);
+        console.error('Seed failed:', e);
         process.exit(1);
     })
     .finally(async () => {

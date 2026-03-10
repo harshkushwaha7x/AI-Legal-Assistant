@@ -132,7 +132,7 @@ export default function ResearchPage() {
                                     if (line.startsWith('- ') || line.startsWith('• ')) {
                                         return <p key={i} className="ml-4 before:content-['•'] before:mr-2 before:text-primary-400">{line.replace(/^[-•]\s*/, '')}</p>;
                                     }
-                                    if (line.startsWith('⚖️') || line.startsWith('📚')) {
+                                    if (line.startsWith('Key Takeaway:') || line.startsWith('Further Research:') || line.startsWith('Note:')) {
                                         return <p key={i} className="mt-2 font-medium text-amber-300">{line}</p>;
                                     }
                                     if (line === '---') {
