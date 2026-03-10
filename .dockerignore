@@ -1,0 +1,14 @@
+.next
+node_modules
+npm-debug.log
+.env
+.env.local
+.git
+.gitignore
+README.md
+CONTRIBUTING.md
+SECURITY.md
+LICENSE
+.vscode
+.idea
+*.md
