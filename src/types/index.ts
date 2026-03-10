@@ -167,3 +167,54 @@ export interface PricingPlan {
     cta: string;
     popular?: boolean;
 }
+
+export interface SelectOption {
+    label: string;
+    value: string;
+}
+
+export interface BreadcrumbItem {
+    label: string;
+    href?: string;
+}
+
+// ─── Activity Log ───────────────────────────────────────────────────
+
+export interface ActivityLog {
+    id: string;
+    action: string;
+    entity: string;
+    entityId: string | null;
+    description: string | null;
+    userId: string;
+    createdAt: Date;
+}
+
+// ─── API Response ───────────────────────────────────────────────────
+
+export interface ApiResponse<T = unknown> {
+    data?: T;
+    error?: string;
+    message?: string;
+}
+
+export interface PaginatedResponse<T> {
+    data: T[];
+    total: number;
+    page: number;
+    pageSize: number;
+    totalPages: number;
+}
+
+// ─── Legal Knowledge ────────────────────────────────────────────────
+
+export interface LegalKnowledge {
+    id: string;
+    title: string;
+    category: string;
+    content: string;
+    source: string | null;
+    jurisdiction: string | null;
+    createdAt: Date;
+    updatedAt: Date;
+}
