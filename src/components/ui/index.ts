@@ -1,4 +1,5 @@
 // UI Component barrel exports
+export { default as Accordion } from './Accordion';
 export { default as Avatar } from './Avatar';
 export { default as Badge } from './Badge';
 export { default as Breadcrumb } from './Breadcrumb';
@@ -6,9 +7,11 @@ export { default as CommandPalette } from './CommandPalette';
 export { default as ConfirmDialog } from './ConfirmDialog';
 export { default as CopyButton } from './CopyButton';
 export { default as DataTable } from './DataTable';
+export { default as Dropdown } from './Dropdown';
 export { default as EmptyState } from './EmptyState';
 export { default as FileUpload } from './FileUpload';
 export { default as KeyboardShortcuts } from './KeyboardShortcuts';
+export { default as LegalDisclaimer } from './LegalDisclaimer';
 export { default as LoadingSpinner } from './LoadingSpinner';
 export { default as Modal } from './Modal';
 export { default as Pagination } from './Pagination';
@@ -17,5 +20,6 @@ export { default as SearchInput } from './SearchInput';
 export { default as Select } from './Select';
 export { default as Skeleton, SkeletonCard, SkeletonTable } from './Skeleton';
 export { default as StatCard } from './StatCard';
+export { default as Switch } from './Switch';
 export { default as Tabs } from './Tabs';
 export { default as Tooltip } from './Tooltip';
