@@ -5,3 +5,5 @@ export { useAsync } from './useAsync';
 export { useDebounce, useClickOutside, useMounted, useToggle } from './useUtilities';
 export { usePageVisibility, useInfiniteScroll, useTimeOnPage, usePrefetch } from './useAnalytics';
 export { useForm } from './useForm';
+export { useFetch } from './useFetch';
+export { useKeyboardShortcut, useMediaQuery } from './useKeyboard';
