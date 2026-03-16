@@ -1,0 +1,20 @@
+// Dashboard component barrel exports
+export { default as ActivityFeed } from './ActivityFeed';
+export { default as AnalyticsCard } from './AnalyticsCard';
+export { default as AnalyticsOverview } from './AnalyticsOverview';
+export { default as DashboardFooter } from './DashboardFooter';
+export { default as DashboardHeader } from './DashboardHeader';
+export { default as DashboardShell } from './DashboardShell';
+export { default as DocumentPreview } from './DocumentPreview';
+export { default as HelpCenter } from './HelpCenter';
+export { default as NotificationCenter } from './NotificationCenter';
+export { default as OnboardingChecklist } from './OnboardingChecklist';
+export { default as QuickActions } from './QuickActions';
+export { default as RecentDocuments } from './RecentDocuments';
+export { default as SearchResults } from './SearchResults';
+export { default as SettingsLayout } from './SettingsLayout';
+export { default as Sidebar } from './Sidebar';
+export { default as SystemStatus } from './SystemStatus';
+export { default as UsageTracker } from './UsageTracker';
+export { default as UserProfile } from './UserProfile';
+export { default as WelcomeBanner } from './WelcomeBanner';
