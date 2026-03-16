@@ -7,3 +7,4 @@ export { usePageVisibility, useInfiniteScroll, useTimeOnPage, usePrefetch } from
 export { useForm } from './useForm';
 export { useFetch } from './useFetch';
 export { useKeyboardShortcut, useMediaQuery } from './useKeyboard';
+export { useOnlineStatus, useDocumentTitle, useScrollPosition, useWindowSize } from './useBrowser';
