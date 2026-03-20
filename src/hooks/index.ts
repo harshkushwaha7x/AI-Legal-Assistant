@@ -9,3 +9,4 @@ export { useFetch } from './useFetch';
 export { useKeyboardShortcut, useMediaQuery } from './useKeyboard';
 export { useOnlineStatus, useDocumentTitle, useScrollPosition, useWindowSize } from './useBrowser';
 export { usePagination } from './usePagination';
+export { useAutoSave } from './useAutoSave';
