@@ -71,6 +71,26 @@ export const url: ValidationRule = {
     message: 'Please enter a valid URL',
 };
 
+export const phone: ValidationRule = {
+    validate: (v) => /^\+?[\d\s()-]{7,15}$/.test(v.trim()),
+    message: 'Please enter a valid phone number',
+};
+
+export const numeric: ValidationRule = {
+    validate: (v) => /^\d+$/.test(v),
+    message: 'This field must contain only numbers',
+};
+
+export const dateString: ValidationRule = {
+    validate: (v) => /^\d{4}-\d{2}-\d{2}$/.test(v) && !isNaN(Date.parse(v)),
+    message: 'Please enter a valid date (YYYY-MM-DD)',
+};
+
+export const matchesField = (fieldName: string, fieldValue: string): ValidationRule => ({
+    validate: (v) => v === fieldValue,
+    message: `Must match ${fieldName}`,
+});
+
 /**
  * Validate an entire form
  */
