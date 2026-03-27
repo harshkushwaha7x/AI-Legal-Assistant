@@ -26,6 +26,16 @@ export class AppError extends Error {
         this.metadata = metadata;
         Object.setPrototypeOf(this, AppError.prototype);
     }
+
+    toJSON() {
+        return {
+            name: this.name,
+            message: this.message,
+            code: this.code,
+            statusCode: this.statusCode,
+            metadata: this.metadata,
+        };
+    }
 }
 
 /**
@@ -99,6 +109,30 @@ export class ExternalServiceError extends AppError {
         );
         this.name = 'ExternalServiceError';
         this.service = service;
+    }
+}
+
+/**
+ * Conflict error — e.g., document version conflict
+ */
+export class ConflictError extends AppError {
+    constructor(message: string = 'Resource conflict — please refresh and try again') {
+        super(message, 'CONFLICT', 409);
+        this.name = 'ConflictError';
+    }
+}
+
+/**
+ * Payload too large — file upload exceeds limit
+ */
+export class PayloadTooLargeError extends AppError {
+    maxSize: number;
+
+    constructor(maxSizeBytes: number) {
+        const mb = (maxSizeBytes / (1024 * 1024)).toFixed(0);
+        super(`Payload exceeds maximum size of ${mb}MB`, 'PAYLOAD_TOO_LARGE', 413);
+        this.name = 'PayloadTooLargeError';
+        this.maxSize = maxSizeBytes;
     }
 }
 
