@@ -4,15 +4,29 @@ export function cn(...inputs: (string | undefined | null | false)[]) {
     return clsx(inputs);
 }
 
-export function formatDate(date: Date): string {
-    return new Intl.DateTimeFormat('en-US', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric',
-    }).format(new Date(date));
+// Re-export from format.ts to avoid duplication — these were originally defined here
+export { formatDate, truncate } from './format';
+
+/**
+ * Generate a unique ID with optional prefix
+ */
+export function generateId(prefix = 'id'): string {
+    return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
 }
 
-export function truncate(str: string, length: number): string {
-    if (str.length <= length) return str;
-    return str.slice(0, length) + '...';
+/**
+ * Deep clone an object (structuredClone wrapper with fallback)
+ */
+export function deepClone<T>(obj: T): T {
+    if (typeof structuredClone === 'function') {
+        return structuredClone(obj);
+    }
+    return JSON.parse(JSON.stringify(obj));
+}
+
+/**
+ * Sleep utility for async delays
+ */
+export function sleep(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
 }
