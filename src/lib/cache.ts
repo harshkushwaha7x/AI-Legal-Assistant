@@ -57,6 +57,29 @@ class Cache {
     }
 
     /**
+     * Get all valid (non-expired) keys
+     */
+    keys(): string[] {
+        const now = Date.now();
+        const validKeys: string[] = [];
+        for (const [key, entry] of this.store) {
+            if (now <= entry.expiresAt) validKeys.push(key);
+        }
+        return validKeys;
+    }
+
+    /**
+     * Get cached value or compute and cache it
+     */
+    getOrSet<T>(key: string, factory: () => T, ttlMs: number = 60 * 1000): T {
+        const cached = this.get<T>(key);
+        if (cached !== null) return cached;
+        const value = factory();
+        this.set(key, value, ttlMs);
+        return value;
+    }
+
+    /**
      * Remove all expired entries
      */
     cleanup(): number {
@@ -77,5 +100,8 @@ export const apiCache = new Cache(200);
 
 // Singleton instance for search result caching
 export const searchCache = new Cache(100);
+
+// Singleton instance for document caching
+export const documentCache = new Cache(50);
 
 export default Cache;
