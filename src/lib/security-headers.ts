@@ -5,33 +5,28 @@ import type { NextRequest } from 'next/server';
  * Security headers middleware.
  * Apply to all responses via Next.js middleware chain.
  */
+/**
+ * Get all security headers as a plain object
+ */
+export function getSecurityHeaders(): Record<string, string> {
+    return {
+        'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https:;",
+        'X-Content-Type-Options': 'nosniff',
+        'X-Frame-Options': 'DENY',
+        'X-XSS-Protection': '1; mode=block',
+        'Referrer-Policy': 'strict-origin-when-cross-origin',
+        'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
+        'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload',
+    };
+}
+
 export function applySecurityHeaders(response: NextResponse): NextResponse {
-    // Prevent MIME type sniffing
-    response.headers.set('X-Content-Type-Options', 'nosniff');
-
-    // Prevent clickjacking
-    response.headers.set('X-Frame-Options', 'DENY');
-
-    // XSS protection (legacy browsers)
-    response.headers.set('X-XSS-Protection', '1; mode=block');
-
-    // Referrer policy
-    response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-
-    // Permissions policy
-    response.headers.set(
-        'Permissions-Policy',
-        'camera=(), microphone=(), geolocation=(), interest-cohort=()'
-    );
-
-    // Strict Transport Security (production only)
-    if (process.env.NODE_ENV === 'production') {
-        response.headers.set(
-            'Strict-Transport-Security',
-            'max-age=63072000; includeSubDomains; preload'
-        );
+    const headers = getSecurityHeaders();
+    for (const [key, value] of Object.entries(headers)) {
+        // Skip HSTS in development
+        if (key === 'Strict-Transport-Security' && process.env.NODE_ENV !== 'production') continue;
+        response.headers.set(key, value);
     }
-
     return response;
 }
 
