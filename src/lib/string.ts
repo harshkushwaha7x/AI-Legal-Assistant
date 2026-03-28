@@ -100,3 +100,24 @@ export function maskEmail(email: string): string {
     if (local.length <= 2) return `${local[0]}***@${domain}`;
     return `${local[0]}***${local[local.length - 1]}@${domain}`;
 }
+
+/**
+ * Count words in text
+ */
+export function wordCount(text: string): number {
+    return text.trim().split(/\s+/).filter(Boolean).length;
+}
+
+/**
+ * Count sentences in text
+ */
+export function sentenceCount(text: string): number {
+    return text.split(/[.!?]+/).filter((s) => s.trim().length > 0).length;
+}
+
+/**
+ * Estimate reading time in minutes
+ */
+export function readingTimeMinutes(text: string, wpm = 200): number {
+    return Math.max(1, Math.ceil(wordCount(text) / wpm));
+}
