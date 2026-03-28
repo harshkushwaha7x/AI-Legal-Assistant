@@ -56,3 +56,29 @@ export function sanitizeEmail(email: string): string | null {
 export function sanitizeSqlInput(input: string): string {
     return input.replace(/['";\\]/g, '');
 }
+
+/**
+ * Sanitize a URL — block javascript: and data: protocols
+ */
+export function sanitizeUrl(url: string): string {
+    const trimmed = url.trim();
+    if (/^(javascript|data|vbscript):/i.test(trimmed)) return '';
+    return trimmed;
+}
+
+/**
+ * Deep-sanitize all string values in an object
+ */
+export function sanitizeObject<T extends Record<string, unknown>>(obj: T, maxLength = 5000): T {
+    const result: Record<string, unknown> = {};
+    for (const [key, value] of Object.entries(obj)) {
+        if (typeof value === 'string') {
+            result[key] = sanitizeInput(value, maxLength);
+        } else if (value && typeof value === 'object' && !Array.isArray(value)) {
+            result[key] = sanitizeObject(value as Record<string, unknown>, maxLength);
+        } else {
+            result[key] = value;
+        }
+    }
+    return result as T;
+}
