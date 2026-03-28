@@ -97,6 +97,7 @@ export const api = {
         list: (params?: string) => apiClient.get(`/api/documents${params ? `?${params}` : ''}`),
         get: (id: string) => apiClient.get(`/api/documents/${id}`),
         create: (data: unknown) => apiClient.post('/api/documents', data),
+        update: (id: string, data: unknown) => apiClient.patch(`/api/documents/${id}`, data),
         delete: (id: string) => apiClient.delete(`/api/documents/${id}`),
     },
 
@@ -125,6 +126,20 @@ export const api = {
     profile: {
         get: () => apiClient.get('/api/profile'),
         update: (data: unknown) => apiClient.patch('/api/profile', data),
+    },
+
+    // Escalations
+    escalations: {
+        list: () => apiClient.get('/api/escalations'),
+        get: (id: string) => apiClient.get(`/api/escalations/${id}`),
+        create: (data: unknown) => apiClient.post('/api/escalations', data),
+        update: (id: string, data: unknown) => apiClient.patch(`/api/escalations/${id}`, data),
+    },
+
+    // Templates
+    templates: {
+        list: () => apiClient.get('/api/templates'),
+        get: (id: string) => apiClient.get(`/api/templates/${id}`),
     },
 
     // Stats
