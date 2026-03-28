@@ -18,6 +18,7 @@ const ENV_VARS: EnvVar[] = [
     { key: 'GITHUB_ID', required: false, description: 'GitHub OAuth client ID' },
     { key: 'GITHUB_SECRET', required: false, description: 'GitHub OAuth client secret' },
     { key: 'OPENAI_API_KEY', required: false, description: 'OpenAI API key for AI features' },
+    { key: 'WEBHOOK_SECRET', required: false, description: 'Secret for webhook signature verification' },
     { key: 'NEXT_PUBLIC_APP_URL', required: false, description: 'Public application URL' },
 ];
 
@@ -53,3 +54,21 @@ export function validateEnv(): { valid: boolean; errors: string[]; warnings: str
 
     return { valid: errors.length === 0, errors, warnings };
 }
+
+/**
+ * Get an environment variable with optional default
+ */
+export function getEnvVar(key: string, defaultValue?: string): string {
+    const value = process.env[key];
+    if (!value && defaultValue === undefined) {
+        throw new Error(`Missing required environment variable: ${key}`);
+    }
+    return value || defaultValue || '';
+}
+
+/**
+ * Environment checks
+ */
+export const isProduction = process.env.NODE_ENV === 'production';
+export const isDevelopment = process.env.NODE_ENV === 'development';
+export const isTest = process.env.NODE_ENV === 'test';
