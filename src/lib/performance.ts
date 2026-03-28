@@ -18,6 +18,7 @@ export async function measureAsync<T>(
 
 /**
  * Retry an async operation with exponential backoff
+ * @deprecated Use `withRetry` from `@/lib/retry` for more control
  */
 export async function retryAsync<T>(
     fn: () => Promise<T>,
@@ -82,4 +83,16 @@ export function memoize<T extends (...args: unknown[]) => unknown>(
         cache.set(key, result);
         return result;
     }) as T;
+}
+
+/**
+ * Wrap a promise with a timeout deadline
+ */
+export function withTimeout<T>(promise: Promise<T>, timeoutMs: number, label = 'Operation'): Promise<T> {
+    return Promise.race([
+        promise,
+        new Promise<never>((_, reject) =>
+            setTimeout(() => reject(new Error(`${label} timed out after ${timeoutMs}ms`)), timeoutMs)
+        ),
+    ]);
 }
