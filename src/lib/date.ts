@@ -98,3 +98,38 @@ export function getDateRange(range: 'today' | '7d' | '30d' | '90d' | 'year'): {
 
     return { start, end };
 }
+
+/**
+ * Add days to a date
+ */
+export function addDays(date: Date | string, days: number): Date {
+    const d = new Date(typeof date === 'string' ? new Date(date) : date);
+    d.setDate(d.getDate() + days);
+    return d;
+}
+
+/**
+ * Add months to a date
+ */
+export function addMonths(date: Date | string, months: number): Date {
+    const d = new Date(typeof date === 'string' ? new Date(date) : date);
+    d.setMonth(d.getMonth() + months);
+    return d;
+}
+
+/**
+ * Check if a date has passed (e.g., contract expiry)
+ */
+export function isExpired(date: Date | string): boolean {
+    return new Date(date).getTime() < Date.now();
+}
+
+/**
+ * Calculate days between two dates
+ */
+export function daysBetween(a: Date | string, b: Date | string): number {
+    const msPerDay = 86400000;
+    const d1 = new Date(a).getTime();
+    const d2 = new Date(b).getTime();
+    return Math.round(Math.abs(d2 - d1) / msPerDay);
+}
