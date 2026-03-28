@@ -55,16 +55,26 @@ class ErrorTracker {
         return this.errors.filter((e) => e.severity === severity);
     }
 
+    getByModule(module: string): TrackedError[] {
+        return this.errors.filter((e) => e.context.module === module);
+    }
+
     clear(): void {
         this.errors = [];
     }
 
-    getStats(): { total: number; bySeverity: Record<string, number> } {
+    getStats(): { total: number; bySeverity: Record<string, number>; byModule: Record<string, number> } {
         const bySeverity: Record<string, number> = {};
+        const byModule: Record<string, number> = {};
         for (const err of this.errors) {
             bySeverity[err.severity] = (bySeverity[err.severity] || 0) + 1;
+            byModule[err.context.module] = (byModule[err.context.module] || 0) + 1;
         }
-        return { total: this.errors.length, bySeverity };
+        return { total: this.errors.length, bySeverity, byModule };
+    }
+
+    exportAll(): TrackedError[] {
+        return [...this.errors];
     }
 }
 
