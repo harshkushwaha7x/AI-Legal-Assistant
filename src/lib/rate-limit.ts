@@ -62,9 +62,17 @@ export function checkRateLimit(
 /**
  * Rate limit headers for API responses
  */
-export function rateLimitHeaders(result: RateLimitResult): Record<string, string> {
+export function rateLimitHeaders(result: RateLimitResult, limit?: number): Record<string, string> {
     return {
+        'X-RateLimit-Limit': (limit || 60).toString(),
         'X-RateLimit-Remaining': result.remaining.toString(),
         'X-RateLimit-Reset': new Date(result.resetAt).toISOString(),
     };
+}
+
+/**
+ * Reset rate limit for an identifier (for testing/admin)
+ */
+export function resetRateLimit(identifier: string): void {
+    cache.delete(identifier);
 }
